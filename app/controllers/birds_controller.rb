@@ -6,11 +6,13 @@ class BirdsController < ApplicationController
     render json: birds
   end
 
-  # POST /birds
+  POST /birds
   def create
-    bird = Bird.create(name: params[:name], species: params[:species])
+    bird = Bird.create(params)
     render json: bird, status: :created
   end
+
+  
 
   # GET /birds/:id
   def show
@@ -22,4 +24,8 @@ class BirdsController < ApplicationController
     end
   end
 
+  private
+  def bird_params
+    params.permit(:name, :species)
+  end
 end
